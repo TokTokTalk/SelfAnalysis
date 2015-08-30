@@ -1,60 +1,56 @@
 package com.toktoktalk.selfanalysis.adapter;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
-import com.toktoktalk.selfanalysis.model.IconsVo;
-
-import java.util.List;
+import com.toktoktalk.selfanalysis.R;
 
 /**
- * Created by seogangmin on 2015. 8. 14..
+ * Created by YoungKyoung on 2015-08-30.
  */
-public class IconsGridAdapter extends BaseAdapter{
-
+public class ImageAdapter extends BaseAdapter{
     private Context mContext;
-    private List<IconsVo> mItems;
-    private LayoutInflater mInflater;
 
+    private Integer[] mThumbIds ={R.mipmap.btn_plus_type1};
 
-    public IconsGridAdapter(Context context, List<IconsVo> items) {
-        this.mContext = context;
-        this.mItems   = items;
-        this.mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    public ImageAdapter(Context c){
+        mContext = c;
     }
 
     @Override
-    public int getCount() {
-        return mItems.size();
+    public int getCount(){
+        return mThumbIds.length;
     }
 
     @Override
     public Object getItem(int position) {
-        return mItems.get(position);
+        return null;
     }
-
     @Override
     public long getItemId(int position) {
-        return position;
+        return 0;
     }
-
     @Override
-    public View getView(int position, View convertView, ViewGroup parent){
+    public View getView(int position, View convertView, ViewGroup parent) {
         ImageView imageView;
         if(convertView == null){
             imageView = new ImageView(mContext);
             imageView.setLayoutParams(new GridView.LayoutParams(85,85));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setPadding(8, 8, 8, 8);
-        }else {
-            imageView =(ImageView)convertView;
+        }else{
+            imageView = (ImageView)convertView;
         }
+
+        imageView.setImageResource(mThumbIds[position]);
+
         return imageView;
     }
-
 }
+
+
+
