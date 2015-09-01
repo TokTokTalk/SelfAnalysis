@@ -8,7 +8,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:gravity="center"
         android:layout_weight="1">
 
@@ -16,8 +16,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="LockScreen Header"
-            android:id="@+id/textView" />
+            android:text="@string/header_title"
+            android:id="@+id/header_view" />
     </LinearLayout>
 
     <LinearLayout
@@ -29,6 +29,9 @@
         <GridView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:verticalSpacing="0dp"
+            android:horizontalSpacing="0dp"
+            android:stretchMode="columnWidth"
             android:numColumns="4"
             android:id="@+id/icons_container" />
     </LinearLayout>

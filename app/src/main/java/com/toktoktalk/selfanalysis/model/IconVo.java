@@ -1,23 +1,22 @@
 package com.toktoktalk.selfanalysis.model;
 
-import android.graphics.Bitmap;
-
 /**
  * Created by seogangmin on 2015. 8. 14..
  */
-public class IconsVo {
+public class IconVo {
     private String id;
     private String keyword;
-    private Bitmap icon;
+    private String icoFilePath;
 
-    public IconsVo(){
+
+    public IconVo() {
 
     }
 
-    public IconsVo(String id, String keyword, Bitmap icon) {
+    public IconVo(String id, String keyword, String icoFilePath) {
         this.id = id;
         this.keyword = keyword;
-        this.icon = icon;
+        this.icoFilePath = icoFilePath;
     }
 
     public String getId() {
@@ -36,11 +35,11 @@ public class IconsVo {
         this.keyword = keyword;
     }
 
-    public Bitmap getIcon() {
-        return icon;
+    public String getIcoFilePath() {
+        return icoFilePath;
     }
 
-    public void setIcon(Bitmap icon) {
-        this.icon = icon;
+    public void setIcoFilePath(String icoFilePath) {
+        this.icoFilePath = icoFilePath;
     }
 }

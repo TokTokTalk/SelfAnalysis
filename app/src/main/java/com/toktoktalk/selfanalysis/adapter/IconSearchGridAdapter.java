@@ -13,20 +13,19 @@ import android.widget.TextView;
 import com.toktoktalk.selfanalysis.R;
 import com.toktoktalk.selfanalysis.model.IconVo;
 
-import java.net.URL;
 import java.util.List;
 
 /**
  * Created by seogangmin on 2015. 8. 14..
  */
-public class IconsGridAdapter extends BaseAdapter{
+public class IconSearchGridAdapter extends BaseAdapter{
 
     private Context mContext;
-    private List<IconVo> mItems;
+    private String[] mItems;
     private LayoutInflater mInflater;
 
 
-    public IconsGridAdapter(Context context, List<IconVo> items) {
+    public IconSearchGridAdapter(Context context, String[] items) {
         this.mContext = context;
         this.mItems   = items;
         this.mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -35,12 +34,12 @@ public class IconsGridAdapter extends BaseAdapter{
 
     @Override
     public int getCount() {
-        return mItems.size();
+        return mItems.length;
     }
 
     @Override
     public Object getItem(int position) {
-        return mItems.get(position);
+        return mItems[position];
     }
 
     @Override
@@ -53,17 +52,9 @@ public class IconsGridAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if(convertView == null){
-            convertView = mInflater.inflate(R.layout.icon_item, parent, false);
+            //convertView = mInflater.inflate(R.layout.icon_item, parent, false);
         }
 
-        ImageView imageView = (ImageView)convertView.findViewById(R.id.ico_view);
-        TextView keywordView = (TextView)convertView.findViewById(R.id.keyword_view);
-
-        IconVo item = mItems.get(position);
-
-        Bitmap bm = BitmapFactory.decodeFile(item.getIcoFilePath());
-        imageView.setImageBitmap(bm);
-        keywordView.setText(item.getKeyword());
 
         return convertView;
     }

@@ -6,9 +6,22 @@
 
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:src="@mipmap/ic_launcher"
-        android:id="@+id/imageView"/>
+        android:id="@+id/ico_view"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:textSize="12sp"
+        android:id="@+id/keyword_view"
+        android:layout_below="@+id/ico_view"
+        android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>
