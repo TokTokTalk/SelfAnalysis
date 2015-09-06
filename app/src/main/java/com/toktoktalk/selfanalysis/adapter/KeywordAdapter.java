@@ -13,20 +13,19 @@ import android.widget.TextView;
 import com.toktoktalk.selfanalysis.R;
 import com.toktoktalk.selfanalysis.model.IconVo;
 
-import java.net.URL;
 import java.util.List;
 
 /**
  * Created by seogangmin on 2015. 8. 14..
  */
-public class IconsGridAdapter extends BaseAdapter{
+public class KeywordAdapter extends BaseAdapter{
 
     private Context mContext;
     private List<IconVo> mItems;
     private LayoutInflater mInflater;
 
 
-    public IconsGridAdapter(Context context, List<IconVo> items) {
+    public KeywordAdapter(Context context, List<IconVo> items) {
         this.mContext = context;
         this.mItems   = items;
         this.mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -53,7 +52,7 @@ public class IconsGridAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if(convertView == null){
-            convertView = mInflater.inflate(R.layout.icon_item, parent, false);
+            convertView = mInflater.inflate(R.layout.keyword_item, parent, false);
         }
 
         ImageView imageView = (ImageView)convertView.findViewById(R.id.ico_view);

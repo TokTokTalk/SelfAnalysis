@@ -5,4 +5,9 @@
 
     <!-- Pinprogress -->
     <dimen name="pin_progress_inner_size">28dp</dimen>
+
+
+    <dimen name="item_size_1">70dip</dimen>
+    <dimen name="item_size_2">90dip</dimen>
+    <dimen name="item_size_3">110dip</dimen>
 </resources>

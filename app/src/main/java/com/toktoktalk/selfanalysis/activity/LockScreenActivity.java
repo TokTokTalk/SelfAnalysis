@@ -1,19 +1,18 @@
-package com.toktoktalk.selfanalysis;
+package com.toktoktalk.selfanalysis.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.toktoktalk.selfanalysis.adapter.IconsGridAdapter;
+import com.toktoktalk.selfanalysis.R;
+import com.toktoktalk.selfanalysis.adapter.KeywordAdapter;
 import com.toktoktalk.selfanalysis.model.IconVo;
 import com.toktoktalk.selfanalysis.utils.ComPreference;
 import com.toktoktalk.selfanalysis.utils.Const;
@@ -30,7 +29,7 @@ public class LockScreenActivity extends Activity{
 
     private GridView         iconsContainer;
     private ImageButton      btnLockClose;
-    private IconsGridAdapter mGridAdapter;
+    private KeywordAdapter mGridAdapter;
     private ComPreference    mPrefer = new ComPreference(this);
 
 
@@ -57,7 +56,7 @@ public class LockScreenActivity extends Activity{
             }
         });
 
-        iconsContainer.setAdapter(new IconsGridAdapter(this, getItems()));
+        iconsContainer.setAdapter(new KeywordAdapter(this, getItems()));
 
     }
 

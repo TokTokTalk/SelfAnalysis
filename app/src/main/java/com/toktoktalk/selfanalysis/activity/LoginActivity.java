@@ -1,4 +1,4 @@
-package com.toktoktalk.selfanalysis;
+package com.toktoktalk.selfanalysis.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,6 +12,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.toktoktalk.selfanalysis.R;
 import com.toktoktalk.selfanalysis.model.UserVo;
 import com.toktoktalk.selfanalysis.utils.ComPreference;
 
@@ -62,6 +63,8 @@ public class LoginActivity extends Activity{
         }else{
             
         }
+
+
 
         /*
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {

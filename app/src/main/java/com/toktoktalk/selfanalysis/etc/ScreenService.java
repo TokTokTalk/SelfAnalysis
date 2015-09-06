@@ -1,4 +1,4 @@
-package com.toktoktalk.selfanalysis;
+package com.toktoktalk.selfanalysis.etc;
 
 import android.app.Service;
 import android.content.Intent;

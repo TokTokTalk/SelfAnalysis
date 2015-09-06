@@ -12,8 +12,9 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
 
+
         <activity
-            android:name=".FrameActivity"
+            android:name=".activity.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,17 +23,6 @@
             </intent-filter>
         </activity>
 
-        <!--
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        -->
 
         <!--
         <activity
@@ -54,11 +44,16 @@
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".LockScreenActivity" />
 
-        <service android:name=".ScreenService" />
+        <activity android:name=".activity.LockScreenActivity" />
 
-        <receiver android:name=".ScreenReceiver" />
+        <activity android:name=".activity.StartActivity" />
+        <activity android:name=".activity.CateListActivity" />
+        <activity android:name=".activity.CateDetailActivity" />
+
+        <service android:name=".etc.ScreenService" />
+
+        <receiver android:name=".etc.ScreenReceiver" />
 
     </application>
 

@@ -18,14 +18,14 @@ import java.util.List;
 /**
  * Created by seogangmin on 2015. 8. 14..
  */
-public class IconSearchGridAdapter extends BaseAdapter{
+public class IconAdapter extends BaseAdapter{
 
     private Context mContext;
-    private String[] mItems;
+    private List<IconVo> mItems;
     private LayoutInflater mInflater;
 
 
-    public IconSearchGridAdapter(Context context, String[] items) {
+    public IconAdapter(Context context, List<IconVo> items) {
         this.mContext = context;
         this.mItems   = items;
         this.mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -34,12 +34,12 @@ public class IconSearchGridAdapter extends BaseAdapter{
 
     @Override
     public int getCount() {
-        return mItems.length;
+        return mItems.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mItems[position];
+        return mItems.get(position);
     }
 
     @Override
@@ -52,8 +52,14 @@ public class IconSearchGridAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if(convertView == null){
-
+            convertView = mInflater.inflate(R.layout.icon_item, parent, false);
         }
+
+        ImageView imageView = (ImageView)convertView.findViewById(R.id.ico_view);
+
+        IconVo item = mItems.get(position);
+        Bitmap bm = BitmapFactory.decodeFile(item.getIcoFilePath());
+        imageView.setImageBitmap(bm);
 
 
         return convertView;

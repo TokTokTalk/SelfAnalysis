@@ -8,16 +8,82 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="210dp"
         android:gravity="center"
-        android:layout_weight="1">
+        android:weightSum="1">
 
-        <TextView
+
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/header_title"
-            android:id="@+id/header_view" />
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="08"
+                    android:textSize="48sp"
+                    android:textColor="@color/main_color"
+                    android:id="@+id/time_hour" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/main_color"
+                    android:textSize="48sp"
+                    android:text="\t:\t"
+                     />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/main_color"
+                    android:textSize="48sp"
+                    android:text="02"
+                    android:id="@+id/time_minute" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="WED,"
+                    android:textColor="@color/main_color"
+                    android:id="@+id/tv_day_of_week" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="\tAPRIL"
+                    android:textColor="@color/main_color"
+                    android:id="@+id/tv_month" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="\t17"
+                    android:textColor="@color/main_color"
+                    android:id="@+id/tv_date" />
+
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -32,7 +98,7 @@
             android:verticalSpacing="0dp"
             android:horizontalSpacing="0dp"
             android:stretchMode="columnWidth"
-            android:numColumns="4"
+            android:numColumns="3"
             android:id="@+id/icons_container" />
     </LinearLayout>
 

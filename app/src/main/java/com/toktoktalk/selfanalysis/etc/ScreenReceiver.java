@@ -1,8 +1,10 @@
-package com.toktoktalk.selfanalysis;
+package com.toktoktalk.selfanalysis.etc;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+
+import com.toktoktalk.selfanalysis.activity.LockScreenActivity;
 
 /**
  * Created by seogangmin on 2015. 8. 9..
