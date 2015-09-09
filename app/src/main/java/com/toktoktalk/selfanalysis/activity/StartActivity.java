@@ -17,15 +17,23 @@ import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphRequestAsyncTask;
 import com.facebook.GraphResponse;
+import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.google.gson.Gson;
 import com.toktoktalk.selfanalysis.R;
+import com.toktoktalk.selfanalysis.model.CreateDocVo;
 import com.toktoktalk.selfanalysis.model.UserVo;
+import com.toktoktalk.selfanalysis.utils.CallbackEvent;
 import com.toktoktalk.selfanalysis.utils.ComPreference;
 import com.toktoktalk.selfanalysis.utils.Const;
+import com.toktoktalk.selfanalysis.utils.EventRegistration;
+import com.toktoktalk.selfanalysis.utils.HttpClient;
 import com.toktoktalk.selfanalysis.utils.ViewAnimator;
+import com.turbomanage.httpclient.HttpResponse;
+import com.turbomanage.httpclient.ParameterMap;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
@@ -99,27 +107,45 @@ public class StartActivity extends Activity{
 
         callbackManager = CallbackManager.Factory.create();
 
-        LoginManager.getInstance().logInWithReadPermissions(StartActivity.this, Arrays.asList("email","public_profile"));
+        LoginManager.getInstance().logInWithReadPermissions(StartActivity.this, Arrays.asList("email", "user_birthday"));
 
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 final AccessToken accessToken = loginResult.getAccessToken();
 
-                String userId = loginResult.getAccessToken().getUserId();
-
-                Toast.makeText(StartActivity.this, userId, Toast.LENGTH_LONG).show();
+                final String userId = loginResult.getAccessToken().getUserId();
 
                 GraphRequestAsyncTask request = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
                     @Override
                     public void onCompleted(JSONObject user, GraphResponse graphResponse) {
-                        String msg = "email : " + user.optString("email");
-                        msg += "\nname : " + user.optString("name");
-                        msg += "\nid : " + user.optString("id");
 
-                        Log.d("debug", msg);
+                        String user_name   = null;
+                        UserVo userVo      = null;
+                        CreateDocVo params = null;
 
-                        Toast.makeText(StartActivity.this, msg, Toast.LENGTH_LONG).show();
+                        try{
+                            user_name = user.get("name").toString();
+                            userVo = new UserVo(userId, user_name);
+                            params = new CreateDocVo(Const.DATABASE_NAME, Const.COLLECTION_USER, userVo);
+
+                        }catch (Exception e){
+                            Toast.makeText(StartActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+
+                        HttpClient client = new HttpClient(StartActivity.this);
+
+                        client.post("/users/joinOrLogin", params, new EventRegistration(new CallbackEvent() {
+                            @Override
+                            public void callbackMethod(HttpResponse response) {
+                                int res = response.getStatus();
+                                Toast.makeText(StartActivity.this, "[code : "+res+"]"+response.getBodyAsString(), Toast.LENGTH_SHORT).show();
+                            }
+                        }));
+
+
                     }
                 }).executeAsync();
             }
@@ -140,4 +166,18 @@ public class StartActivity extends Activity{
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AppEventsLogger.activateApp(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        AppEventsLogger.activateApp(this);
+    }
+
+
 }

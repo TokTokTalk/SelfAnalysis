@@ -4,7 +4,7 @@ package com.toktoktalk.selfanalysis.model;
  * Created by seogangmin on 2015. 8. 23..
  */
 public class UserVo {
-    private String fbId;
+    private String fb_id;
     private String name;
 
 
@@ -12,17 +12,17 @@ public class UserVo {
 
     }
 
-    public UserVo(String fbId, String name) {
-        this.fbId = fbId;
+    public UserVo(String fb_id, String name) {
+        this.fb_id = fb_id;
         this.name = name;
     }
 
-    public String getFbId() {
-        return fbId;
+    public String getFb_id() {
+        return fb_id;
     }
 
-    public void setFbId(String fbId) {
-        this.fbId = fbId;
+    public void setFb_id(String fb_id) {
+        this.fb_id = fb_id;
     }
 
     public String getName() {
