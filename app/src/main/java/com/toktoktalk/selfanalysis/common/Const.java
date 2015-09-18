@@ -1,4 +1,4 @@
-package com.toktoktalk.selfanalysis.utils;
+package com.toktoktalk.selfanalysis.common;
 
 /**
  * Created by seogangmin on 2015. 8. 31..
@@ -10,10 +10,12 @@ public class Const {
 
 
     public final static String SERVER_DOMAIN = "http://loopyseo-vm.cloudapp.net:1337";
-    //public final static String SERVER_DOMAIN = "http://192.168.0.40:1337";
-    //public final static String SERVER_DOMAIN   = "http://192.168.0.93:1337";
+    //public final static String SERVER_DOMAIN = "http://192.168.0.40:1337";    //home
+    //public final static String SERVER_DOMAIN   = "http://192.168.0.93:1337"; //cafe
 
 
     public final static String DATABASE_NAME   = "toctoktalk-products";
     public final static String COLLECTION_USER = "user";
+    public final static String COLLECTION_CATEGORY = "category";
+    public final static String COLLECTION_KEYWORD = "keyword";
 }

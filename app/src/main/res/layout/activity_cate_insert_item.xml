@@ -16,8 +16,9 @@
         <ImageView
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:background="@drawable/circle_shape"
             android:id="@+id/btn_cate_insert"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@mipmap/btn_add"/>
     </LinearLayout>
 
     <LinearLayout

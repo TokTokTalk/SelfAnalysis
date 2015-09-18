@@ -1,8 +1,8 @@
 package com.toktoktalk.selfanalysis.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,20 +20,17 @@ import com.facebook.GraphResponse;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.google.gson.Gson;
 import com.toktoktalk.selfanalysis.R;
-import com.toktoktalk.selfanalysis.model.CreateDocVo;
+import com.toktoktalk.selfanalysis.common.BaseActivity;
+import com.toktoktalk.selfanalysis.common.CallbackEvent;
+import com.toktoktalk.selfanalysis.common.Const;
+import com.toktoktalk.selfanalysis.common.EventRegistration;
+import com.toktoktalk.selfanalysis.common.HttpClient;
 import com.toktoktalk.selfanalysis.model.UserVo;
-import com.toktoktalk.selfanalysis.utils.CallbackEvent;
+import com.toktoktalk.selfanalysis.apis.CreateDoc;
 import com.toktoktalk.selfanalysis.utils.ComPreference;
-import com.toktoktalk.selfanalysis.utils.Const;
-import com.toktoktalk.selfanalysis.utils.EventRegistration;
-import com.toktoktalk.selfanalysis.utils.HttpClient;
 import com.toktoktalk.selfanalysis.utils.ViewAnimator;
-import com.turbomanage.httpclient.HttpResponse;
-import com.turbomanage.httpclient.ParameterMap;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
@@ -42,7 +39,7 @@ import java.util.Arrays;
 /**
  * Created by seogangmin on 2015. 9. 2..
  */
-public class StartActivity extends Activity{
+public class StartActivity extends BaseActivity {
 
     private LinearLayout linearLoading;
     private LinearLayout linearLogin;
@@ -51,8 +48,10 @@ public class StartActivity extends Activity{
 
     private CallbackManager callbackManager;
 
-    private UserVo user;
+    private UserVo mUser;
     private ComPreference prefer = new ComPreference(this);
+
+    private Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,9 +70,15 @@ public class StartActivity extends Activity{
         linearLogin   = (LinearLayout)findViewById(R.id.linearLogin);
 
         if(isSaved()){
-            Toast.makeText(StartActivity.this, "USER LOG ON!!", Toast.LENGTH_LONG).show();
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    moveToMain();
+                }
+            }, 3000);
+
         }else{
-            chekLogon();
+            showLoginBtn();
         }
 
     }
@@ -83,12 +88,11 @@ public class StartActivity extends Activity{
         String userJson = prefer.getValue(Const.PREF_SAVED_USER, null);
         if(userJson != null){
             isSaved = true;
-            user = new Gson().fromJson(userJson, UserVo.class);
         }
         return isSaved;
     }
 
-    private void chekLogon(){
+    private void showLoginBtn(){
         viewAnim.fadeAnimation(linearLoading, true);
         linearLoading.setVisibility(View.INVISIBLE);
         viewAnim.fadeAnimation(linearLogin, false);
@@ -120,28 +124,30 @@ public class StartActivity extends Activity{
                     @Override
                     public void onCompleted(JSONObject user, GraphResponse graphResponse) {
 
-                        String user_name   = null;
-                        UserVo userVo      = null;
-                        CreateDocVo params = null;
+                        String user_name = null;
+                        UserVo userVo = null;
+                        CreateDoc params = null;
 
-                        try{
+                        Toast.makeText(StartActivity.this, userId, Toast.LENGTH_SHORT).show();
+
+                        try {
                             user_name = user.get("name").toString();
                             userVo = new UserVo(userId, user_name);
-                            params = new CreateDocVo(Const.DATABASE_NAME, Const.COLLECTION_USER, userVo);
+                            params = new CreateDoc(Const.DATABASE_NAME, Const.COLLECTION_USER, userVo);
 
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             Toast.makeText(StartActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                             return;
                         }
-
 
                         HttpClient client = new HttpClient(StartActivity.this);
 
                         client.post("/users/joinOrLogin", params, new EventRegistration(new CallbackEvent() {
                             @Override
-                            public void callbackMethod(HttpResponse response) {
-                                int res = response.getStatus();
-                                Toast.makeText(StartActivity.this, "[code : "+res+"]"+response.getBodyAsString(), Toast.LENGTH_SHORT).show();
+                            public void callbackMethod(Object obj) {
+                                Log.d("debug",obj.toString());
+                                prefer.put(Const.PREF_SAVED_USER, obj.toString());
+                                moveToMain();
                             }
                         }));
 
@@ -179,5 +185,10 @@ public class StartActivity extends Activity{
         AppEventsLogger.activateApp(this);
     }
 
+    private void moveToMain(){
+        Intent i = new Intent(this, CateListActivity.class);
+        startActivity(i);
+        this.finish();
+    }
 
 }

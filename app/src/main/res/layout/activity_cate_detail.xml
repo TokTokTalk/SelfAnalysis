@@ -3,134 +3,54 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:background="@color/white"
     >
+    <include layout="@layout/include_header_type3"
+        android:id="@+id/include2" />
 
-    <LinearLayout
-        android:orientation="vertical"
+    <TextView android:id="@android:id/empty"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <include layout="@layout/include_header"/>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@color/transparent"
+        android:gravity="center"
+        android:text="키워드를 등록해 주세요."/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="52dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_gravity="left"
-                android:layout_weight="1"
-                android:text="카테고리"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:paddingTop="16dp"
-                android:id="@+id/tv_cate_name" />
-
-            <ImageButton
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:id="@+id/btn_edit" />
-
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="44dp"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="key1, key2, key3, key4, key5"
-                android:id="@+id/keyword_container"
-                android:layout_marginBottom="20dp"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-
-
-            <Button
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:text="On"
-                android:id="@+id/btn_on" />
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="/"
-                />
-
-            <Button
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:text="Off"
-                android:id="@+id/btn_off" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/light_gray"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"/>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_weight="0.8"
-                android:gravity="center_vertical"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="icon"
-                />
-
-            <ImageButton
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:id="@+id/btn_insert_icon" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:background="@color/light_gray"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/cate_list_scroll"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/include2">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            >
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
 
-
-            <ListView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/icons_list_container"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/listView" />
+                android:orientation="vertical"
+                android:showDividers="middle"
+                android:divider="?android:dividerHorizontal"
+                android:animateLayoutChanges="true"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp" />
         </LinearLayout>
 
+    </ScrollView>
 
-    </LinearLayout>
 
+    <!--
+    <ListView
+        android:id="@+id/lv_icons"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/include2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+        -->
 </RelativeLayout>

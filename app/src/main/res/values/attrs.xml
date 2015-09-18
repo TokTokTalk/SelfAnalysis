@@ -23,4 +23,5 @@
         <attr name="circleColor" format="color" />
         <attr name="progressColor" format="color" />
     </declare-styleable>
+
 </resources>

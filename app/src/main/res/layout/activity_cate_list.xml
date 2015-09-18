@@ -1,16 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     >
-    <include layout="@layout/include_header"/>
 
-
-    <ListView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/cate_list"
-        android:dividerHeight="10dp"
-        />
-</LinearLayout>
+        android:orientation="vertical"
+        android:background="@color/white">
+
+        <include layout="@layout/include_header_type1" android:id="@+id/header"/>
+        <include layout="@layout/include_loading"/>
+
+        <!--
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/cate_list"
+            android:dividerHeight="10dp"
+            /> -->
+        <!--
+        <view
+            android:id="@+id/cate_list"
+            class="android.support.v7.widget.RecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true" />-->
+
+        <TextView android:id="@android:id/empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:gravity="center"
+            android:text="카테고리를 등록해 주세요."/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/cate_list_scroll">
+
+            <LinearLayout
+                android:id="@+id/cate_list_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:animateLayoutChanges="true"
+                />
+        </ScrollView>
+    </LinearLayout>
+
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add_white_24dp"
+        fab:fab_colorNormal="@color/primary"
+        fab:fab_colorPressed="@color/primary_dark"
+        fab:fab_colorRipple="@color/ripple"
+        android:layout_margin="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+         />
+</RelativeLayout>

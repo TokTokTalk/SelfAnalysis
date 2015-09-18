@@ -2,11 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:background="@color/white"
+    android:padding="10dp"
     >
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/border_shadow"
+        android:padding="10dp"
+        >
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -27,7 +31,9 @@
             <ImageButton
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:id="@+id/btn_edit" />
+                android:src="@mipmap/btn_edit"
+                android:background="@drawable/click_selector"
+                android:id="@+id/btn_delete" />
 
         </LinearLayout>
         <LinearLayout
@@ -41,14 +47,16 @@
                 android:layout_height="44dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="key1, key2, key3, key4, key5"
-                android:id="@+id/keyword_container"
+                android:id="@+id/tv_keywords"
                 android:layout_marginBottom="20dp"
                 />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_8dp"
+            android:paddingRight="@dimen/padding_8dp">
 
             <TextView
 
@@ -78,8 +86,21 @@
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5">
+                android:layout_weight="0.5"
+                android:gravity="center_vertical"
+                android:id="@+id/keyword_container"
+                android:background="@drawable/click_selector">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/main_color"
+                    android:textStyle="bold"
+                    android:text="아이콘을 등록해주세요"
+                    android:id="@+id/tv_empty" />
+
+                <!--
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
@@ -124,6 +145,7 @@
                     android:textStyle="bold"
                     android:text="+5"
                     android:id="@+id/tv_more" />
+                    -->
 
 
             </LinearLayout>
@@ -136,10 +158,9 @@
                 android:text="@string/btn_txt_detail_show"
                 android:textSize="12sp"
                 android:id="@+id/btn_detail"
-                android:background="@color/white"
+                android:background="@drawable/click_selector"
                 />
 
         </LinearLayout>
-
     </LinearLayout>
 </RelativeLayout>

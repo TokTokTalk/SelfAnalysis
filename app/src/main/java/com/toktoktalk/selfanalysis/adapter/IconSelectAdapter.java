@@ -1,15 +1,12 @@
 package com.toktoktalk.selfanalysis.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.toktoktalk.selfanalysis.R;
 import com.toktoktalk.selfanalysis.model.IconVo;
@@ -17,21 +14,23 @@ import com.toktoktalk.selfanalysis.model.IconVo;
 import java.util.List;
 
 /**
- * Created by seogangmin on 2015. 8. 14..
+ * Created by seogangmin on 2015. 9. 16..
  */
-public class KeywordAdapter extends BaseAdapter{
+public class IconSelectAdapter extends BaseAdapter{
 
-    private Context mContext;
     private List<IconVo> mItems;
+    private Context mCtx;
     private LayoutInflater mInflater;
 
 
-    public KeywordAdapter(Context context, List<IconVo> items) {
-        this.mContext = context;
-        this.mItems   = items;
-        this.mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    public IconSelectAdapter() {
     }
 
+    public IconSelectAdapter(Context mCtx, List<IconVo> mItems) {
+        this.mCtx = mCtx;
+        this.mInflater = LayoutInflater.from(mCtx);
+        this.mItems = mItems;
+    }
 
     @Override
     public int getCount() {
@@ -48,24 +47,21 @@ public class KeywordAdapter extends BaseAdapter{
         return position;
     }
 
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
-        if(convertView == null){
-            convertView = mInflater.inflate(R.layout.keyword_item, parent, false);
-        }
-
-        ImageView imageView = (ImageView)convertView.findViewById(R.id.ico_view);
-        TextView keywordView = (TextView)convertView.findViewById(R.id.keyword_view);
-
+        final ImageView imageView;
         IconVo item = mItems.get(position);
+        if (convertView == null) {
+            convertView = mInflater.inflate(R.layout.icon_item, null);
+            imageView = (ImageView) convertView.findViewById(R.id.ico_view);
 
-        Bitmap bm = BitmapFactory.decodeFile(item.getIcoFilePath());
-        imageView.setImageBitmap(bm);
-        keywordView.setText(item.getKeyword());
+            if(item.getIcoFilePath()!=null){
+                String filePath = mItems.get(position).getIcoFilePath();
+                imageView.setImageBitmap(BitmapFactory.decodeFile(filePath));
+            }
+
+        }
 
         return convertView;
     }
-
 }
