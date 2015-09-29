@@ -12,22 +12,23 @@ public class CateItemVo {
     private String _id;
     private String cate_name;
     private String user_ref;
-    private Map<String, IconVo> keyword_refs;
+    private String start_dt;
+
 
     public CateItemVo() {
     }
 
-    public CateItemVo(String cate_name, Map<String, IconVo> keyword_refs, String _id, String user_ref) {
+    public CateItemVo(String cate_name, String _id, String user_ref, String start_dt) {
         this.cate_name = cate_name;
-        this.keyword_refs = keyword_refs;
         this._id = _id;
         this.user_ref = user_ref;
+        this.start_dt = start_dt;
+
     }
 
     public void initEmpty(){
         this.cate_name = "";
         this.user_ref = "";
-        this.keyword_refs = new HashMap<String, IconVo>();
     }
 
     public String get_id() {
@@ -46,13 +47,6 @@ public class CateItemVo {
         this.cate_name = cate_name;
     }
 
-    public Map getKeyword_refs() {
-        return keyword_refs;
-    }
-
-    public void setKeyword_refs(Map<String, IconVo> keyword_refs) {
-        this.keyword_refs = keyword_refs;
-    }
 
     public String getUser_ref() {
         return user_ref;
@@ -60,5 +54,13 @@ public class CateItemVo {
 
     public void setUser_ref(String user_ref) {
         this.user_ref = user_ref;
+    }
+
+    public String getStart_dt() {
+        return start_dt;
+    }
+
+    public void setStart_dt(String start_dt) {
+        this.start_dt = start_dt;
     }
 }

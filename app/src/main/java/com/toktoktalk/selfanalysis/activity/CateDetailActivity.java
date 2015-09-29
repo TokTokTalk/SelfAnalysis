@@ -28,7 +28,9 @@ import com.toktoktalk.selfanalysis.common.HttpClient;
 import com.toktoktalk.selfanalysis.apis.QueryDocs;
 import com.toktoktalk.selfanalysis.model.CateItemVo;
 import com.toktoktalk.selfanalysis.model.IconVo;
+import com.toktoktalk.selfanalysis.model.KeywordIcon;
 import com.toktoktalk.selfanalysis.utils.ComPreference;
+import com.toktoktalk.selfanalysis.utils.Logging;
 
 import java.util.HashMap;
 import java.util.List;
@@ -55,6 +57,7 @@ public class CateDetailActivity extends BaseActivity {
     private final int RESULT_CODE = 1;
 
     private ComPreference mPref = new ComPreference(CateDetailActivity.this);
+
 
 
     @Override
@@ -151,6 +154,7 @@ public class CateDetailActivity extends BaseActivity {
 
         Map find = new HashMap();
         find.put("keyword", mInsertIcon.getKeyword());
+        find.put("cate_ref", mCate.get_id());
 
         InsertKeyword insertKeyword = new InsertKeyword(createDoc, find);
 
@@ -182,13 +186,19 @@ public class CateDetailActivity extends BaseActivity {
 
 
     private void setKeywordList(String jsonData){
-        Log.d("debug", jsonData);
+
         mKeywordList = (List<IconVo>)GsonConverter.fromJsonArray(jsonData, IconVo.class);
+        String matched = mPref.getValue(Const.PREF_SAVED_KEYWORDS, null);
+
+        Map savedMap = (Map)GsonConverter.fromJson(matched, Map.class);
+
+        Map matchedKeywords = (Map)GsonConverter.fromJson(matched, Map.class);
 
         for(int i=0; i<mKeywordList.size(); i++){
             IconVo item = mKeywordList.get(i);
-            String icoFilePath = mPref.getValue(item.get_id(), null);
-            item.setIcoFilePath(icoFilePath);
+            Map itemMap = (Map)savedMap.get(item.get_id());
+            String path = Const.ICON_SAVED_FOLDER + "/" + itemMap.get("icon_file_name");
+            item.setIcoFilePath(path);
             addItem(item);
         }
     }

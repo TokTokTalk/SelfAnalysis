@@ -2,11 +2,13 @@ package com.toktoktalk.selfanalysis.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -20,20 +22,29 @@ import com.facebook.GraphResponse;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.google.gson.Gson;
 import com.toktoktalk.selfanalysis.R;
 import com.toktoktalk.selfanalysis.common.BaseActivity;
 import com.toktoktalk.selfanalysis.common.CallbackEvent;
 import com.toktoktalk.selfanalysis.common.Const;
 import com.toktoktalk.selfanalysis.common.EventRegistration;
+import com.toktoktalk.selfanalysis.common.GsonConverter;
 import com.toktoktalk.selfanalysis.common.HttpClient;
 import com.toktoktalk.selfanalysis.model.UserVo;
 import com.toktoktalk.selfanalysis.apis.CreateDoc;
+import com.toktoktalk.selfanalysis.utils.AsyncFileDownloader;
 import com.toktoktalk.selfanalysis.utils.ComPreference;
+import com.toktoktalk.selfanalysis.utils.Logging;
 import com.toktoktalk.selfanalysis.utils.ViewAnimator;
 
+import org.apache.http.protocol.HTTP;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -50,12 +61,30 @@ public class StartActivity extends BaseActivity {
 
     private UserVo mUser;
     private ComPreference prefer = new ComPreference(this);
+    private TextView mTextLoading;
 
     private Handler mHandler = new Handler();
+
+    private final String SERVER_ICONS_PATH  =  Const.RESOURCE_PATH;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        /*
+        File dir = new File(Const.ICON_SAVED_FOLDER);
+        if (dir.isDirectory())
+        {
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++)
+            {
+                new File(dir, children[i]).delete();
+            }
+        }*/
+
+
 
         init();
 
@@ -68,22 +97,20 @@ public class StartActivity extends BaseActivity {
 
         linearLoading = (LinearLayout)findViewById(R.id.linearLoading);
         linearLogin   = (LinearLayout)findViewById(R.id.linearLogin);
+        mTextLoading = (TextView) findViewById(R.id.txt_loading);
 
-        if(isSaved()){
-            mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    moveToMain();
-                }
-            }, 3000);
 
+        if(isSavedUser()){
+            setLoading();
+            checkResources();
         }else{
-            showLoginBtn();
+            setBtnFbLogin();
         }
+
 
     }
 
-    private boolean isSaved(){
+    private boolean isSavedUser(){
         boolean isSaved = false;
         String userJson = prefer.getValue(Const.PREF_SAVED_USER, null);
         if(userJson != null){
@@ -92,12 +119,10 @@ public class StartActivity extends BaseActivity {
         return isSaved;
     }
 
-    private void showLoginBtn(){
-        viewAnim.fadeAnimation(linearLoading, true);
-        linearLoading.setVisibility(View.INVISIBLE);
+
+    private void setBtnFbLogin(){
         viewAnim.fadeAnimation(linearLogin, false);
         linearLogin.setVisibility(View.VISIBLE);
-
         Button btn_fb_login = (Button)findViewById(R.id.btn_fb_login);
         btn_fb_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +131,13 @@ public class StartActivity extends BaseActivity {
             }
         });
     }
+
+    private void setLoading(){
+        linearLogin.setVisibility(View.INVISIBLE);
+        viewAnim.fadeAnimation(linearLoading, false);
+        linearLoading.setVisibility(View.VISIBLE);
+    }
+
 
     private void onFBLogin(){
 
@@ -145,9 +177,30 @@ public class StartActivity extends BaseActivity {
                         client.post("/users/joinOrLogin", params, new EventRegistration(new CallbackEvent() {
                             @Override
                             public void callbackMethod(Object obj) {
-                                Log.d("debug",obj.toString());
-                                prefer.put(Const.PREF_SAVED_USER, obj.toString());
-                                moveToMain();
+                                //Log.d("debug", obj.toString());
+
+                                JSONObject resultObj = null;
+
+                                try {
+                                    resultObj = new JSONObject(obj.toString());
+
+                                    String userJson = resultObj.get("user").toString();
+                                    String iconsJson = resultObj.get("icon_list").toString();
+
+                                    Log.d("debug", userJson);
+                                    Log.d("debug", iconsJson);
+
+                                    prefer.put(Const.PREF_ACTIVE_KEYWORDS, iconsJson);
+                                    prefer.put(Const.PREF_SAVED_KEYWORDS, iconsJson);
+
+                                    prefer.put(Const.PREF_SAVED_USER, userJson);
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                                setLoading();
+                                checkResources();
                             }
                         }));
 
@@ -189,6 +242,61 @@ public class StartActivity extends BaseActivity {
         Intent i = new Intent(this, CateListActivity.class);
         startActivity(i);
         this.finish();
+    }
+
+    private void checkResources(){
+        HttpClient client = new HttpClient(this);
+
+        Map query = new HashMap();
+        query.put("file_list", getSavedIconResources());
+
+        client.post("/iconresource/chkResources", query, new EventRegistration(new CallbackEvent() {
+            @Override
+            public void callbackMethod(Object object) {
+                String msg = object.toString();
+                Toast.makeText(StartActivity.this, "compared : " + msg, Toast.LENGTH_SHORT).show();
+                String[] filenames = (String[]) GsonConverter.fromJson(msg, String[].class);
+
+                if (filenames.length > 0) {
+                    mTextLoading.setText("UPDATE");
+                    downloadIconResource(filenames);
+                } else {
+                    moveToMain();
+                }
+
+            }
+        }));
+
+    }
+
+    private String[] getSavedIconResources(){
+        File dir = new File(Const.ICON_SAVED_FOLDER);
+        if(!dir.exists()){
+            dir.mkdir();
+        }
+        return dir.list();
+    }
+
+    private void downloadIconResource(String[] filenames){
+
+        Map<String, String> match = new HashMap<String, String>();
+
+        for(int i=0; i<filenames.length; i++){
+            String filename = filenames[i];
+            String target = SERVER_ICONS_PATH+"/"+filename;
+            String dest   = Const.ICON_SAVED_FOLDER + "/" + filename;
+
+         match.put(target, dest);
+        }
+
+        AsyncFileDownloader downloader = new AsyncFileDownloader(match, true, new EventRegistration(new CallbackEvent() {
+            @Override
+            public void callbackMethod(Object object) {
+                Logging.d("debug", object.toString());
+                moveToMain();
+            }
+        }));
+        downloader.start();
     }
 
 }

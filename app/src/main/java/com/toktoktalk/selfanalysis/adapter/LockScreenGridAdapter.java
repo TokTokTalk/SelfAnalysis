@@ -13,20 +13,21 @@ import android.widget.TextView;
 
 import com.toktoktalk.selfanalysis.R;
 import com.toktoktalk.selfanalysis.model.IconVo;
+import com.toktoktalk.selfanalysis.model.KeywordIcon;
 
 import java.util.List;
 
 /**
  * Created by seogangmin on 2015. 8. 14..
  */
-public class KeywordAdapter extends BaseAdapter{
+public class LockScreenGridAdapter extends BaseAdapter{
 
     private Context mContext;
-    private List<IconVo> mItems;
+    private List<KeywordIcon> mItems;
     private LayoutInflater mInflater;
 
 
-    public KeywordAdapter(Context context, List<IconVo> items) {
+    public LockScreenGridAdapter(Context context, List<KeywordIcon> items) {
         this.mContext = context;
         this.mItems   = items;
         this.mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -59,9 +60,9 @@ public class KeywordAdapter extends BaseAdapter{
         ImageView imageView = (ImageView)convertView.findViewById(R.id.ico_view);
         TextView keywordView = (TextView)convertView.findViewById(R.id.keyword_view);
 
-        IconVo item = mItems.get(position);
+        KeywordIcon item = mItems.get(position);
 
-        Bitmap bm = BitmapFactory.decodeFile(item.getIcoFilePath());
+        Bitmap bm = BitmapFactory.decodeFile(item.getIco_file_path());
         imageView.setImageBitmap(bm);
         keywordView.setText(item.getKeyword());
 

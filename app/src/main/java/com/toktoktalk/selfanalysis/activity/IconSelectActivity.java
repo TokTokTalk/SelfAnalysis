@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.melnykov.fab.FloatingActionButton;
 import com.toktoktalk.selfanalysis.R;
 import com.toktoktalk.selfanalysis.adapter.IconSelectAdapter;
 import com.toktoktalk.selfanalysis.common.BaseActivity;
@@ -27,6 +28,7 @@ public class IconSelectActivity extends BaseActivity implements AdapterView.OnIt
     private List<IconVo> mItem;
     private IconVo mSelectedItem;
     private ImageButton mBtnNext;
+    private FloatingActionButton fab;
 
     final String SAVED_ICONS_FOLDER  = Environment.getExternalStorageDirectory().getAbsolutePath()+"/toktoktalk";
 
@@ -46,6 +48,8 @@ public class IconSelectActivity extends BaseActivity implements AdapterView.OnIt
 
         mItem = getSavedIcons();
 
+        fab  = (FloatingActionButton) findViewById(R.id.fab);
+
         IconSelectAdapter adapter = new IconSelectAdapter(this, mItem);
         mGridView.setAdapter(adapter);
         mGridView.setOnItemClickListener(this);
@@ -53,15 +57,23 @@ public class IconSelectActivity extends BaseActivity implements AdapterView.OnIt
         mBtnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mSelectedItem == null){
-                    Toast.makeText(IconSelectActivity.this,"아이콘을 선택해 주세요.",Toast.LENGTH_SHORT).show();
-                }else{
+                if (mSelectedItem == null) {
+                    Toast.makeText(IconSelectActivity.this, "아이콘을 선택해 주세요.", Toast.LENGTH_SHORT).show();
+                } else {
 
                     Intent i = new Intent();
                     i.putExtra("icon_file_path", mSelectedItem.getIcoFilePath());
                     setResult(1, i);
                     IconSelectActivity.this.finish();
                 }
+            }
+        });
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(IconSelectActivity.this, IconSearchActivity.class);
+                startActivity(i);
             }
         });
 

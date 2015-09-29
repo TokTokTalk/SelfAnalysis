@@ -34,4 +34,17 @@
         android:text="CateDetailActivity"
         android:id="@+id/btn_catedetailactivity"
         />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="IconSearchActivity"
+        android:id="@+id/btn_iconsearchactivity"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="chartActivity"
+        android:id="@+id/btn_chartactivity"
+        />
 </LinearLayout>

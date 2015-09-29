@@ -19,6 +19,9 @@ public class MainActivity extends Activity {
     private Button btnLockScreenAct;
     private Button btnCateListAct;
     private Button btnCateDetailAct;
+    private Button btnChartAct;
+
+    private Button btnIconSearchAct;
 
 
 
@@ -61,6 +64,10 @@ public class MainActivity extends Activity {
         btnLockScreenAct = (Button)findViewById(R.id.btn_lockscreen);
         btnCateListAct   = (Button)findViewById(R.id.btn_catelistactivity);
         btnCateDetailAct = (Button)findViewById(R.id.btn_catedetailactivity);
+        btnIconSearchAct = (Button)findViewById(R.id.btn_iconsearchactivity);
+
+        btnChartAct = (Button)findViewById(R.id.btn_chartactivity);
+
 
         btnStartAct.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +97,22 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, CateDetailActivity.class);
+                startActivity(i);
+            }
+        });
+
+        btnIconSearchAct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, IconSearchActivity.class);
+                startActivity(i);
+            }
+        });
+
+        btnChartAct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, ChartActivity.class);
                 startActivity(i);
             }
         });

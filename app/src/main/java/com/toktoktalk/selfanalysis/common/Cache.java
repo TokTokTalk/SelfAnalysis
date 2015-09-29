@@ -15,7 +15,7 @@ public class Cache {
 
         UserVo userVo      = null;
         ComPreference pref = new ComPreference(ctx);
-        String userJson = pref.getValue(Const.PREF_SAVED_USER, null).toString();
+        String userJson    = pref.getValue(Const.PREF_SAVED_USER, null).toString();
 
         Log.d("debug", userJson);
 
