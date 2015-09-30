@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +25,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.melnykov.fab.FloatingActionButton;
 import com.toktoktalk.selfanalysis.R;
-import com.toktoktalk.selfanalysis.adapter.CateListAdapter;
 import com.toktoktalk.selfanalysis.apis.CreateDoc;
 import com.toktoktalk.selfanalysis.apis.QueryDocs;
 import com.toktoktalk.selfanalysis.common.BaseActivity;
@@ -41,14 +39,9 @@ import com.toktoktalk.selfanalysis.etc.ScreenService;
 import com.toktoktalk.selfanalysis.model.CateItemVo;
 import com.toktoktalk.selfanalysis.model.KeywordIcon;
 import com.toktoktalk.selfanalysis.utils.ComPreference;
-import com.toktoktalk.selfanalysis.utils.Logging;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -125,18 +118,25 @@ public class CateListActivity extends BaseActivity {
         mContainerView = (ViewGroup) findViewById(R.id.cate_list_container);
         btnCateAdd = (FloatingActionButton) findViewById(R.id.fab);
 
+
+        boolean isActiveLockScreen = mPref.getValue(Const.PREF_ACTIVE_LOCKSCREEN, false);
+
         mActiveToggle = (ToggleButton) findViewById(R.id.btn_active);
+        mActiveToggle.setChecked(isActiveLockScreen);
+
         mActiveToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     Intent intent = new Intent(CateListActivity.this, ScreenService.class);
                     startService(intent);
-                    Toast.makeText(CateListActivity.this, "lockscreen on", Toast.LENGTH_SHORT).show();
+                    mPref.put(Const.PREF_ACTIVE_LOCKSCREEN, true);
+                    Toast.makeText(CateListActivity.this, "Lockscreen이 활성화 되었습니다.", Toast.LENGTH_SHORT).show();
                 }else{
                     Intent intent = new Intent(CateListActivity.this, ScreenService.class);
                     stopService(intent);
-                    Toast.makeText(CateListActivity.this, "lockscreen off", Toast.LENGTH_SHORT).show();
+                    mPref.put(Const.PREF_ACTIVE_LOCKSCREEN, false);
+                    Toast.makeText(CateListActivity.this, "Lockscreen이 비활성화 되었습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -156,6 +156,8 @@ public class CateListActivity extends BaseActivity {
 
             }
         });
+
+        btnCateAdd.hide();
 
         mScrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
             @Override

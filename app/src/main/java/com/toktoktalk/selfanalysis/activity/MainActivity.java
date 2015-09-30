@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.toktoktalk.selfanalysis.R;
-import com.toktoktalk.selfanalysis.etc.ScreenService;
 
 public class MainActivity extends Activity {
 
@@ -112,7 +111,7 @@ public class MainActivity extends Activity {
         btnChartAct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, ChartActivity.class);
+                Intent i = new Intent(MainActivity.this, ChartActivity1.class);
                 startActivity(i);
             }
         });

@@ -87,6 +87,7 @@ public class CateDetailActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
+                /*
                 mSimpleDialog = new SimpleDialog(CateDetailActivity.this, "AddKeyword", new EventRegistration(new CallbackEvent() {
                     @Override
                     public void callbackMethod(Object body) {
@@ -97,7 +98,9 @@ public class CateDetailActivity extends BaseActivity {
                         mSimpleDialog.dismiss();
                     }
                 }));
-                mSimpleDialog.show();
+                mSimpleDialog.show();*/
+
+                Toast.makeText(CateDetailActivity.this, "준비중입니다.", Toast.LENGTH_SHORT).show();
             }
         });
 

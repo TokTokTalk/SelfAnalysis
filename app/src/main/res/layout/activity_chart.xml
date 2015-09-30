@@ -1,7 +1,8 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.toktoktalk.selfanalysis.activity.ChartActivity">
+    android:orientation="vertical"
+    tools:context="com.toktoktalk.selfanalysis.activity.ChartActivity1">
 
     <TextView
         android:layout_width="match_parent"
@@ -13,11 +14,32 @@
         android:id="@+id/textView4" />
 
     <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/chart1"
+        android:id="@+id/chart_line"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_below="@+id/textView4"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-</RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="키워드별 비율"
+        android:padding="5dp"
+        android:textColor="@color/main_color"
+        android:id="@+id/textView5"
+        android:layout_below="@+id/chart_line"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/chart_pie"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@+id/textView5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+</LinearLayout>

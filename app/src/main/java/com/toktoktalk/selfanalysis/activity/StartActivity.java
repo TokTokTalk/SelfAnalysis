@@ -160,8 +160,6 @@ public class StartActivity extends BaseActivity {
                         UserVo userVo = null;
                         CreateDoc params = null;
 
-                        Toast.makeText(StartActivity.this, userId, Toast.LENGTH_SHORT).show();
-
                         try {
                             user_name = user.get("name").toString();
                             userVo = new UserVo(userId, user_name);
@@ -211,7 +209,7 @@ public class StartActivity extends BaseActivity {
 
             @Override
             public void onCancel() {
-                Toast.makeText(StartActivity.this, "Login Cancel", Toast.LENGTH_LONG).show();
+                Toast.makeText(StartActivity.this, "로그인이 취소되었습니다.", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -239,9 +237,17 @@ public class StartActivity extends BaseActivity {
     }
 
     private void moveToMain(){
-        Intent i = new Intent(this, CateListActivity.class);
-        startActivity(i);
-        this.finish();
+
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent i = new Intent(StartActivity.this, CateListActivity.class);
+                startActivity(i);
+                StartActivity.this.finish();
+            }
+        }, 3000);
+
+
     }
 
     private void checkResources(){
@@ -254,7 +260,6 @@ public class StartActivity extends BaseActivity {
             @Override
             public void callbackMethod(Object object) {
                 String msg = object.toString();
-                Toast.makeText(StartActivity.this, "compared : " + msg, Toast.LENGTH_SHORT).show();
                 String[] filenames = (String[]) GsonConverter.fromJson(msg, String[].class);
 
                 if (filenames.length > 0) {
