@@ -51,29 +51,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dfe62c7f-7190-439a-abf2-da222c9d3b59" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/app_icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/app_icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/toktoktalk/selfanalysis/fragment/LineChartFragment.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/toktoktalk/selfanalysis/fragment/PieChartFragment.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_chart_pager.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_linechart.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_piechart.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/toktoktalk/selfanalysis/activity/ChartActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/toktoktalk/selfanalysis/activity/ChartActivity1.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/toktoktalk/selfanalysis/activity/CateDetailActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/toktoktalk/selfanalysis/activity/CateDetailActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/toktoktalk/selfanalysis/activity/CateListActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/toktoktalk/selfanalysis/activity/CateListActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/toktoktalk/selfanalysis/activity/ChartActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/toktoktalk/selfanalysis/activity/ChartActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/toktoktalk/selfanalysis/common/Const.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/toktoktalk/selfanalysis/common/Const.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/toktoktalk/selfanalysis/activity/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/toktoktalk/selfanalysis/activity/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/toktoktalk/selfanalysis/activity/StartActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/toktoktalk/selfanalysis/activity/StartActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_cate_list_item.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_cate_list_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_chart.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_chart.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_start.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_start.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/menu_chart.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_chart.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SelfAnalysis.iws" />
@@ -3412,7 +3389,13 @@
       <option name="project" value="LOCAL" />
       <updated>1443536565278</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="prototype 80%">
+      <created>1443634590293</created>
+      <option name="number" value="00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1443634590293</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TodoView">
